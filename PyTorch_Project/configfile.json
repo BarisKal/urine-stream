@@ -1,0 +1,56 @@
+{
+    "train_dataset_params": {
+        "dataset_name": "train",
+        "dataset_resolution": 32,
+        "dataset_path": "../WaterVid_Annotated_32/train/",
+        "dataset_label_path": "../WaterVid_Annotated_32/train.csv",
+        "delimiter": ";",
+        "data_transforms": "transforms.Compose([transforms.ToPILImage(),transforms.RandomHorizontalFlip(),transforms.RandomRotation(30),transforms.ToTensor(),transforms.Normalize(np.array([0.31656, 0.26646, 0.21063]), np.array([0.15003, 0.14259, 0.13772]))])",
+        "loader_params": {
+            "batch_size": 64,
+            "shuffle": true,
+            "num_workers": 8,
+            "pin_memory": true
+        }
+    },
+    "validation_dataset_params": {
+        "dataset_name": "validation",
+        "dataset_resolution": 32,
+        "dataset_path": "../WaterVid_Annotated_32/validation/",
+        "dataset_label_path": "../WaterVid_Annotated_32/validation.csv",
+        "delimiter": ";",
+        "data_transforms": "transforms.Compose([transforms.ToPILImage(), transforms.ToTensor(),transforms.Normalize(np.array([0.31656, 0.26646, 0.21063]), np.array([0.15003, 0.14259, 0.13772]))])",
+        "loader_params": {
+            "batch_size": 64,
+            "shuffle": true,
+            "num_workers": 8,
+            "pin_memory": true
+        }
+    },
+    "test_dataset_params": {
+        "dataset_name": "test",
+        "dataset_resolution": 32,
+        "dataset_path": "../WaterVid_Annotated_32/test/",
+        "dataset_label_path": "../WaterVid_Annotated_32/test.csv",
+        "delimiter": ";",
+        "data_transforms": "transforms.Compose([transforms.ToPILImage(), transforms.ToTensor(),transforms.Normalize(np.array([0.31656, 0.26646, 0.21063]), np.array([0.15003, 0.14259, 0.13772]))])",
+        "loader_params": {
+            "batch_size": 64,
+            "shuffle": false,
+            "num_workers": 8,
+            "pin_memory": true
+        }
+    },
+    "model_params": {
+        "model_name": "complex_cnn",
+        "max_epochs": 30,
+        "lr": 0.001,
+        "weight_decay": 0,
+        "use_dropout": true,
+        "early_stopping": 5,
+        "last_path": "./models/weights/last_weights.pt",
+        "best_path": "./models/weights/best_weights.pt"
+    },
+    "number_channels": 3,
+    "calculate_stats_on_testset": false
+}
