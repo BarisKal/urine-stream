@@ -16,6 +16,6 @@ $**python urinestream.py configfile.json**
 If needed, change beforehand parameters in configfile.json
 ## Metrics and plots
 The error metric I specified or rather tried to minimize or maximize were training/validation loss and test accuracy. The losses are plotted and can be found [here](https://github.com/BarisKal/urine-stream/tree/main/PyTorch_Project/visualizations/plots).
-Due to the nature of the images (mostly with the same dark background), it was possible to obtain a test accuracy of 100% (round at 5 decimal points). Because I'm a beginner, I started to achieved a test accuracy of 90% but was surprised with the results. Similar results could be also obtained by training the model with images without the dgark background. Furthermore, images with 32x32 pixels were sufficient enough to reach this accuracy.
+Due to the nature of the images (mostly with the same dark background), it was possible to obtain a test accuracy of 100% (round at 5 decimal points). Because I'm a beginner, I tried to achieve a test accuracy of 90% but was surprised with the results. Similar results could be also obtained by training the model with images without the dark background. Furthermore, images with 32x32 pixels were sufficient enough to reach this accuracy.
 
 # TODO! Provide data sets
