@@ -11,9 +11,10 @@ Furthermore, the images were taken in different environments, outside with no sp
 * If the second letter is equal to **o** the image was taken without a predefined background.
 (Around 80% of the images have the dark background because it was much easier to generate the images under these conditions.)
 ## Running the pipeline
-**python urinestream.py configfile.json**
+$**python urinestream.py configfile.json**
+
 If needed, change beforehand parameters in configfile.json
-## Metric and plots
+## Metrics and plots
 The error metric I specified or rather tried to minimize or maximize were training/validation loss and test accuracy. The losses are plotted and can be found [here](https://github.com/BarisKal/urine-stream/tree/main/PyTorch_Project/visualizations/plots).
 Due to the nature of the images (mostly with the same dark background), it was possible to obtain a test accuracy of 100% (round at 5 decimal points). Because I'm a beginner, I started to achieved a test accuracy of 90% but was surprised with the results. Similar results could be also obtained by training the model with images without the dgark background. Furthermore, images with 32x32 pixels were sufficient enough to reach this accuracy.
 
