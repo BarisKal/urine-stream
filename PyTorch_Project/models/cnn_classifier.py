@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
@@ -60,27 +61,29 @@ class Model:
         test_labels = test_loader.labels['Filename'].values.tolist()
         predictions = []
         targets = []
-        accs = 0
-        lens = 0
+        correct = 0
+        total = 0
 
         for data, target in test_loader:
             if self.train_on_gpu:
                     data, target = data.cuda(), target.cuda()
 
             output = self.model(data)
-            lens += len(target)
-            accs += torch.sum(output[:,1] == target) / len(target)
 
-            prediction = output[:,1].detach().cpu().numpy()
-            targ = target[:].detach().cpu().numpy()
+            _, predicted = torch.max(output.data, 1)
+            targ = target[:].cpu().numpy()
+            targets = np.concatenate([targets, targ])
 
-            for pred in prediction:
-                predictions.append(pred)
+            pred = predicted[:].cpu().numpy()
+            predictions = np.concatenate([predictions, pred])
 
-            for tar in targ:
-                targets.append(tar)
-     
-        return pd.DataFrame(list(zip(test_labels, prediction)), columns=['Filename','Prediction'])
+            total += target.size(0)
+            correct += (predicted == target).sum().item()
+        
+        test_acc = round((100 * correct / total), 5)
+        print('Test Accuracy: {} %'.format(test_acc))
+
+        return test_acc, pd.DataFrame(list(zip(test_labels, predictions)), columns=['Filename','Prediction'])
     
     def load_model_weights(self, path_to_weights: str):
         self.model.load_state_dict(torch.load(path_to_weights))

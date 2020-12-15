@@ -42,14 +42,14 @@
         }
     },
     "model_params": {
-        "model_name": "complex_cnn",
-        "max_epochs": 30,
+        "model_name": "basic_cnn",
+        "max_epochs": 100,
         "lr": 0.001,
         "weight_decay": 0,
         "use_dropout": true,
-        "early_stopping": 5,
-        "last_path": "./models/weights/last_weights.pt",
-        "best_path": "./models/weights/best_weights.pt"
+        "early_stopping": 10,
+        "last_path": "./models/weights/",
+        "best_path": "./models/weights/"
     },
     "number_channels": 3,
     "calculate_stats_on_testset": false

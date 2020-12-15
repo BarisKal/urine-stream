@@ -66,7 +66,7 @@ def main(config: dict):
         print('Epoch: {} \tTraining Loss: {:.7f} \tValidation Loss: {:.7f}'.format(epoch + 1, train_loss, validation_loss))
         if validation_loss < minimum_validation_loss:
             print('Validation loss decreased ({:.7f} --> {:.7f}).  Saving model ...'.format(minimum_validation_loss, validation_loss))
-            torch.save(cnn_model.model.state_dict(), config['model_params']['best_path'])
+            torch.save(cnn_model.model.state_dict(), config['model_params']['best_path'] + model_name + '_best_weights.pt')
             minimum_validation_loss = validation_loss
             non_improving_epochs = 0
         else:
@@ -77,13 +77,13 @@ def main(config: dict):
     
     # Save last weights
     print('Saving last weights to {0}'.format(config['model_params']['last_path']))
-    torch.save(cnn_model.model.state_dict(), config['model_params']['last_path'])
+    torch.save(cnn_model.model.state_dict(), config['model_params']['last_path'] + model_name + '_last_weights.pt')
+
+    test_accuracy, predictions = cnn_model.predict(test_dataset_loader, config['model_params']['best_path'] + model_name + '_best_weights.pt')
+    save_pandas_df_to_csv(predictions, './' + model_name + '_predictions.csv', True, ';')
 
     # Save plot with training and validation loss
-    plot_loss(cnn_model.train_losses, cnn_model.validation_losses, './visualizations/plots/' + model_name + '_losses_urinestream.png', 'epochs', 'losses')
-
-    predictions = cnn_model.predict(test_dataset_loader, config['model_params']['best_path'])
-    save_pandas_df_to_csv(predictions, './' + model_name + '_predictions.csv', True, ';')
+    plot_loss(cnn_model.train_losses, cnn_model.validation_losses, test_accuracy, './visualizations/plots/' + model_name + '_losses_urinestream.png', 'epochs', 'losses')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Perform model training.')
