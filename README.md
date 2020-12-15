@@ -4,11 +4,13 @@ In this PyTorch project we classify images including two forms of water streams 
 Around 100k images were taken, 44% of category good and 56% of category bad. These images were split in train (60%), validation (20%), and test set (20%). To gain knowledge about constructing networks with different resolutions, the images are provided in 300x300 and 32x32 pixels. Although labels are provided, the prefixes of the image names give the indication to which group the image belongs to:
 * Images starting with **g** belong to category good.
 * Images starting with **b** belong to category bad.
+<br/>
 Furthermore, the images were taken in different environments, outside with no specific (predefined) background and inside with a dark background. The second letter in the image name therefore indicates were the image was taken:
+<br/>
 * If the second letter is equal to **d** the image was taken with a dark background.
 * If the second letter is equal to **o** the image was taken without a predefined background.
 (Around 80% of the images have the dark background because it was much easier to generate the images under these conditions.)
 ## Running the pipeline
-** python urinestream.py configfile.json **
+**python urinestream.py configfile.json**
 If needed, change beforehand parameters in configfile.json
 # TODO! Provide data sets
