@@ -1,21 +1,23 @@
-# util.py
 import os
 import json
 import csv
+from typing import Tuple
 import cv2
 import numpy as np
 
-def parse_configuration(config_file_path: str):
+def parse_configuration(config_file_path: str) -> dict:
     """Loads config file if a string was passed and return the input if a dictionary was passed.
     """
-    if isinstance(config_file_path, str):
-        with open(config_file_path) as json_file:
-            return json.load(json_file)
-    else:
-        return config_file_path
+    try:
+        if isinstance(config_file_path, str):
+            with open(config_file_path) as json_file:
+                return json.load(json_file)
+    except:
+        print('Can\'t read passed configuration file')
+        raise
 
 
-def calculate_statistics(path_to_data: str, path_to_labels: str, delim: chr, skip_header: bool, num_channels: int):
+def calculate_statistics(path_to_data: str, path_to_labels: str, delim: chr, skip_header: bool, num_channels: int) -> Tuple[np.array, np.array]:
     """Calculate mean and std statistics of input images for normalizing datasest
     """    
     channel_sum = np.zeros(num_channels)
@@ -33,6 +35,7 @@ def calculate_statistics(path_to_data: str, path_to_labels: str, delim: chr, ski
             channel_sum_squared += np.sum(np.square(img), axis=(0, 1))
         except:
             print('Image {0} couldn\'t processed during calculating statistics.'.format(img_path))
+            raise
 
     bgr_mean = channel_sum / pixel_num
     bgr_std = np.sqrt(channel_sum_squared / pixel_num - np.square(bgr_mean))

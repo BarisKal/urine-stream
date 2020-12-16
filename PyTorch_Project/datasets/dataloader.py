@@ -1,4 +1,3 @@
-# All modules regarding Data Loading
 import os
 import cv2
 from torch.utils import data
@@ -8,7 +7,7 @@ import numpy as np
 
 class CustomDatasetDataLoader():
     """Create custom data loaders and pass datasets and labels to them.
-       Furthermore, transformations and statistics for normalizing the datasets will be read from the config file if it is passed.
+       Furthermore, transformations and normalizations will be applied to the datasets.
     """
     def __init__(self, configuration: dict, rgb_mean: np.array = None, rgb_std: np.array = None):
         self.configuration = configuration
@@ -26,7 +25,7 @@ class CustomDatasetDataLoader():
         self.dataloader = data.DataLoader(self.dataset, **configuration['loader_params'])
         print('Dataset and dataloader for {0} set was created'.format(configuration['dataset_name'].upper()))
 
-    def _load_data_labels(self, configuration):
+    def _load_data_labels(self, configuration) -> pd.DataFrame:
         return pd.read_csv(configuration['dataset_label_path'], sep=configuration['separator'])
 
     def __len__(self):

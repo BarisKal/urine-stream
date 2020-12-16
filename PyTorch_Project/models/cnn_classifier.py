@@ -1,9 +1,14 @@
+from typing import Tuple
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
 
 class Model:
+    """
+    Main class where training, validation, and prediction is done in separate functions.
+
+    """
     def __init__(self, model, criterion: nn.CrossEntropyLoss, optimizer: torch.optim, train_loader, validation_loader):
         self.model = model
         self.criterion = criterion
@@ -19,7 +24,7 @@ class Model:
         else:
             print('Train on CPU because CUDA isn\'t available.')            
     
-    def train(self):
+    def train(self) -> float:
         train_loss = 0.0
 
         self.model.train()
@@ -37,7 +42,7 @@ class Model:
         train_loss = train_loss/len(self.train_loader.sampler)
         return train_loss
     
-    def validate(self):
+    def validate(self) -> float:
         validation_loss = 0.0
         
         self.model.eval()
@@ -54,7 +59,7 @@ class Model:
 
         return validation_loss
 
-    def predict(self, test_loader, path_to_weights: str):
+    def predict(self, test_loader, path_to_weights: str) -> Tuple[float, pd.DataFrame]:
         self.load_model_weights(path_to_weights)
         self.model.eval()
 

@@ -3,6 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class BasicCNN(nn.Module):
+    """
+    This class defines the structure of a very basic CNN.
+    """
     def __init__(self):
         super().__init__()
         # Convolutional Layer (sees 32x32x3 image tensor | outputs 16x16x16 image tensor)
@@ -21,8 +24,6 @@ class BasicCNN(nn.Module):
         self.fc1 = nn.Linear(8*8*128, 512)
         self.fc2 = nn.Linear(512, 256)
         self.fc3 = nn.Linear(256, 2)
-        
-        self.dropout = nn.Dropout(0.2)
     
     def forward(self, x):
         x = F.relu(self.bn1(self.conv1(x)))
@@ -32,14 +33,7 @@ class BasicCNN(nn.Module):
         
         #print(x.shape)
         x = x.view(-1, 8*8*128)
-        #x = x.view(-1, 18*18*128)
-        x = self.dropout(x)
-
         x = F.relu(self.fc1(x))
-        x = self.dropout(x)
-
         x = F.relu(self.fc2(x))
-        x = self.dropout(x)
-
         yhat = F.relu(self.fc3(x))
         return yhat

@@ -1,22 +1,10 @@
 import torch.nn as nn
 
-class ConvLayer(nn.Module):
-    def __init__(self, in_channels, out_channels):
-        super(ConvLayer, self).__init__()
-
-        self.conv = nn.Conv2d(in_channels=in_channels, kernel_size=3, out_channels=out_channels, stride=1, padding=1)
-        self.bn = nn.BatchNorm2d(num_features=out_channels)
-        self.relu = nn.ReLU()
-
-    def forward(self, x):
-        x = self.conv(x)
-        x = self.bn(x)
-        x = self.relu(x)
-        return x
-
-
 class ComplexCNN(nn.Module):
-    def __init__(self, use_dropout: bool = True):
+    """
+    Definition of a more compex (deep) CNN than defined in basiccnn_model.py
+    """
+    def __init__(self, use_dropout: bool = True, dropout_probability: float = 0.5):
         super().__init__()
 
         self.block1 = nn.Sequential(
@@ -43,7 +31,7 @@ class ComplexCNN(nn.Module):
             # use dropout layer in fully connected classification part like in ImageNet paper
             self.fc = nn.Sequential(
                 nn.Linear(in_features=128, out_features=64),
-                nn.Dropout(0.5),
+                nn.Dropout(dropout_probability),
                 nn.Linear(in_features=64, out_features=2)
             )
         else:
@@ -61,3 +49,20 @@ class ComplexCNN(nn.Module):
         yhat = self.fc(x)
 
         return yhat
+
+class ConvLayer(nn.Module):
+    """
+    Serves as encapsulation of ComplexCNN
+    """
+    def __init__(self, in_channels, out_channels):
+        super(ConvLayer, self).__init__()
+
+        self.conv = nn.Conv2d(in_channels=in_channels, kernel_size=3, out_channels=out_channels, stride=1, padding=1)
+        self.bn = nn.BatchNorm2d(num_features=out_channels)
+        self.relu = nn.ReLU()
+
+    def forward(self, x):
+        x = self.conv(x)
+        x = self.bn(x)
+        x = self.relu(x)
+        return x
