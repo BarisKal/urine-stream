@@ -20,3 +20,4 @@ Due to the nature of the images (mostly with the same dark background), it was p
 
 ## Model weights and data sets
 Can be found inside releases. The model weights are saved under PyTorch_Project -> models -> weights. The imgaes can be placed anywhere but the paths to the labels and images have to be set in the configfile.json.
+Images in higher resolution with 300x300 pixels, can be downloaded [here](https://mega.nz/file/bIR2mbKT#ZtVDEW0-N8CzKuxjtt4thHh94hLPZWIRUQmAu8T0B-U)
