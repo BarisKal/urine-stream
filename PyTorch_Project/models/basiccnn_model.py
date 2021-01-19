@@ -21,7 +21,7 @@ class BasicCNN(nn.Module):
         self.pool = nn.MaxPool2d(2, 2)
 
         # Fully connected layers
-        self.fc1 = nn.Linear(8*8*128, 512)
+        self.fc1 = nn.Linear(24*24*128, 512)
         self.fc2 = nn.Linear(512, 256)
         self.fc3 = nn.Linear(256, 2)
     
@@ -32,7 +32,7 @@ class BasicCNN(nn.Module):
         x = self.pool(x)
         
         #print(x.shape)
-        x = x.view(-1, 8*8*128)
+        x = x.view(-1, 24*24*128)
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         yhat = F.relu(self.fc3(x))

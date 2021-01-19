@@ -1,11 +1,11 @@
 {
     "train_dataset_params": {
         "dataset_name": "train",
-        "dataset_resolution": 32,
-        "dataset_path": "../WaterVid_Annotated_32/train/",
-        "dataset_label_path": "../WaterVid_Annotated_32/train.csv",
+        "dataset_resolution": 96,
+        "dataset_path": "../WaterVid_Annotated_96/train/",
+        "dataset_label_path": "../WaterVid_Annotated_96/train.csv",
         "delimiter": ";",
-        "data_transforms": "transforms.Compose([transforms.ToPILImage(),transforms.RandomHorizontalFlip(),transforms.RandomRotation(30),transforms.ToTensor(),transforms.Normalize(np.array([0.31656, 0.26646, 0.21063]), np.array([0.15003, 0.14259, 0.13772]))])",
+        "data_transforms": "transforms.Compose([transforms.ToPILImage(),transforms.RandomHorizontalFlip(),transforms.RandomRotation(30),transforms.ToTensor(),transforms.Normalize(np.array([0.31652900903431447, 0.266250765902844, 0.21060654775159457]), np.array([0.1562390761865127, 0.14919033862737696, 0.14389230815030807]))])",
         "loader_params": {
             "batch_size": 64,
             "shuffle": true,
@@ -15,11 +15,11 @@
     },
     "validation_dataset_params": {
         "dataset_name": "validation",
-        "dataset_resolution": 32,
-        "dataset_path": "../WaterVid_Annotated_32/validation/",
-        "dataset_label_path": "../WaterVid_Annotated_32/validation.csv",
+        "dataset_resolution": 96,
+        "dataset_path": "../WaterVid_Annotated_96/validation/",
+        "dataset_label_path": "../WaterVid_Annotated_96/validation.csv",
         "delimiter": ";",
-        "data_transforms": "transforms.Compose([transforms.ToPILImage(), transforms.ToTensor(),transforms.Normalize(np.array([0.31656, 0.26646, 0.21063]), np.array([0.15003, 0.14259, 0.13772]))])",
+        "data_transforms": "transforms.Compose([transforms.ToPILImage(), transforms.ToTensor(),transforms.Normalize(np.array([0.31652900903431447, 0.266250765902844, 0.21060654775159457]), np.array([0.1562390761865127, 0.14919033862737696, 0.14389230815030807]))])",
         "loader_params": {
             "batch_size": 64,
             "shuffle": true,
@@ -29,11 +29,11 @@
     },
     "test_dataset_params": {
         "dataset_name": "test",
-        "dataset_resolution": 32,
-        "dataset_path": "../WaterVid_Annotated_32/test/",
-        "dataset_label_path": "../WaterVid_Annotated_32/test.csv",
+        "dataset_resolution": 96,
+        "dataset_path": "../WaterVid_Annotated_96/test/",
+        "dataset_label_path": "../WaterVid_Annotated_96/test.csv",
         "delimiter": ";",
-        "data_transforms": "transforms.Compose([transforms.ToPILImage(), transforms.ToTensor(),transforms.Normalize(np.array([0.31656, 0.26646, 0.21063]), np.array([0.15003, 0.14259, 0.13772]))])",
+        "data_transforms": "transforms.Compose([transforms.ToPILImage(), transforms.ToTensor(),transforms.Normalize(np.array([0.31652900903431447, 0.266250765902844, 0.21060654775159457]), np.array([0.1562390761865127, 0.14919033862737696, 0.14389230815030807]))])",
         "loader_params": {
             "batch_size": 64,
             "shuffle": false,
@@ -43,8 +43,8 @@
     },
     "model_params": {
         "model_name": "complex_cnn",
-        "max_epochs": 100,
-        "lr": 0.001,
+        "max_epochs": 15,
+        "lr": 0.1,
         "weight_decay": 0,
         "use_dropout": true,
         "dropout_probability": 0.5,

@@ -22,7 +22,7 @@ class Model:
             self.model.cuda()
             print('CUDA is available! Training on GPU')
         else:
-            print('Train on CPU because CUDA isn\'t available.')            
+            print('Train on CPU because CUDA isn\'t available.')
     
     def train(self) -> float:
         train_loss = 0.0

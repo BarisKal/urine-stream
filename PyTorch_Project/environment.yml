@@ -75,14 +75,19 @@ dependencies:
   - zstd=1.4.5=h6597ccf_2
   - pip:
     - astroid==2.4.2
+    - click==7.1.2
     - cycler==0.10.0
     - dataclasses==0.6
+    - flask==1.1.2
     - future==0.18.2
     - imageio==2.9.0
     - isort==5.6.4
+    - itsdangerous==1.1.0
+    - jinja2==2.11.2
     - joblib==0.17.0
     - kiwisolver==1.3.1
     - lazy-object-proxy==1.4.3
+    - markupsafe==1.1.1
     - matplotlib==3.3.3
     - mccabe==0.6.1
     - networkx==2.5
@@ -101,4 +106,7 @@ dependencies:
     - toml==0.10.2
     - torchsummary==1.5.1
     - tqdm==4.23.4
+    - werkzeug==1.0.1
     - wrapt==1.12.1
+prefix: /home/asfinag/anaconda3/envs/pytorch_env
+

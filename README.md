@@ -22,9 +22,13 @@ Due to the nature of the images (mostly with the same dark background), it was p
 Can be found inside releases. The model weights are saved under PyTorch_Project -> models -> weights. The imgaes can be placed anywhere but the paths to the labels and images have to be set in the configfile.json.
 Images in higher resolution with 300x300 pixels, can be downloaded [here](https://mega.nz/file/bIR2mbKT#ZtVDEW0-N8CzKuxjtt4thHh94hLPZWIRUQmAu8T0B-U)
 
+## Starting web-application
+$**python webapp.py**
+
 ## Brief description of Python files in project
 * configfile.json: Global variables and configurations
-* urinestream.py: Main entry point of the program and where configuration file is read.
+* urinestream.py: Main entry point of the program and where configuration file is read
+* webapp.py: Web-application around PyTorch model to predict images with upload functionality
 * datasets/dataloader.py: Definition of custom dataloader for PyTorch
 * models/cnn_classifier.py: Main class where training, validation, and testing is done
 * models/basiccnn_model.py: Definition of a very basic CNN model

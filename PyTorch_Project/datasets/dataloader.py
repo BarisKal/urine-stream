@@ -36,8 +36,8 @@ class CustomDatasetDataLoader():
     def __iter__(self):
         """Return a batch of data.
         """
-        for data in self.dataloader:
-            yield data
+        for img in self.dataloader:
+            yield img
 
 class CustomDataset():
     def __init__(self, dataframe, data_dir, transform=None):
@@ -53,7 +53,7 @@ class CustomDataset():
         image_name, label = self.dataframe.iloc[index]
         image_path = os.path.join(self.data_dir, image_name)
         image = cv2.imread(image_path)
-        
+
         if self.transform != None:
             image = self.transform(image)
         

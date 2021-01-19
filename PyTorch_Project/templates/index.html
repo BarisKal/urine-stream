@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+	<form class="form-signin" method=post enctype=multipart/form-data>
+		<h1 class="h2 mb-3 font-weight-normal">Urine Stream Classifier</h1>
+		<h2 class="h4 mb-3 font-weight-normal">Upload image</h2>
+		<input type="file" name="photo" class="form-control-file" id="inputfile"  onchange="preview_image(event)" multiple>
+		<br />
+		<img id="output-image" class="rounded mx-auto d-block"/>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+	</form>
+
+	<script type="text/javascript">
+		function preview_image(event) {
+			var reader = new FileReader();
+			reader.onload = function(){
+				var output = document.getElementById('output-image')
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
+
+<form class="form-signin" method=post enctype=multipart/form-data>
+	<h2 class="h4 mb-3 font-weight-normal">Find results here after upload: <br /></h2>
+	{% for elem in res %}
+    	<h6>{{elem}}</h6>
+	{% endfor %}
+</form>
+{% endblock %}

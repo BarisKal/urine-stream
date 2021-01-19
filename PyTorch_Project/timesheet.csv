@@ -16,3 +16,7 @@ Date;Number_Hours;Description
 12.12.2020;6;Hacking
 13.12.2020;4;Hacking
 14.12.2020;3;Hacking
+29.12.2020;6;Working on webapp
+05.01.2021;5;Converting model to ONNX and trying to build a webapp around it
+10.01.2021;5;Webapp with Flask and PyTorch model built
+18.01.2021;4;Webapp finished

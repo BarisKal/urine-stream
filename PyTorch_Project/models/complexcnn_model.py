@@ -6,38 +6,34 @@ class ComplexCNN(nn.Module):
     """
     def __init__(self, use_dropout: bool = True, dropout_probability: float = 0.5):
         super().__init__()
-
         self.block1 = nn.Sequential(
-            ConvLayer(in_channels=3, out_channels=32),
-            ConvLayer(in_channels=32, out_channels=32),
+            ConvLayer(in_channels=3, out_channels=96),
+            ConvLayer(in_channels=96, out_channels=96),
             nn.MaxPool2d(kernel_size=2)
         )
-
         self.block2 = nn.Sequential(
-            ConvLayer(in_channels=32, out_channels=64),
-            ConvLayer(in_channels=64, out_channels=64),
-            ConvLayer(in_channels=64, out_channels=64),
+            ConvLayer(in_channels=96, out_channels=192),
+            ConvLayer(in_channels=192, out_channels=192),
+            ConvLayer(in_channels=192, out_channels=192),
             nn.MaxPool2d(kernel_size=2)
         )
-
         self.block3 = nn.Sequential(
-            ConvLayer(in_channels=64, out_channels=128),
-            ConvLayer(in_channels=128, out_channels=128),
-            ConvLayer(in_channels=128, out_channels=128),
+            ConvLayer(in_channels=192, out_channels=384),
+            ConvLayer(in_channels=384, out_channels=384),
+            ConvLayer(in_channels=384, out_channels=384),
             nn.MaxPool2d(kernel_size=8),
         )
-
         if use_dropout:
             # use dropout layer in fully connected classification part like in ImageNet paper
             self.fc = nn.Sequential(
-                nn.Linear(in_features=128, out_features=64),
+                nn.Linear(in_features=3*3*384, out_features=192),
                 nn.Dropout(dropout_probability),
-                nn.Linear(in_features=64, out_features=2)
+                nn.Linear(in_features=192, out_features=2)
             )
         else:
             self.fc = nn.Sequential(
-                nn.Linear(in_features=128, out_features=64),
-                nn.Linear(in_features=64, out_features=2)
+                nn.Linear(in_features=3*3*384, out_features=192),
+                nn.Linear(in_features=192, out_features=2)
             )
 
     def forward(self, x):
@@ -45,7 +41,8 @@ class ComplexCNN(nn.Module):
         x = self.block2(x)
         x = self.block3(x)
 
-        x = x.view(-1, 128)
+        #print(x.shape)
+        x = x.view(x.size(0), 3*3*384)
         yhat = self.fc(x)
 
         return yhat
@@ -58,11 +55,11 @@ class ConvLayer(nn.Module):
         super(ConvLayer, self).__init__()
 
         self.conv = nn.Conv2d(in_channels=in_channels, kernel_size=3, out_channels=out_channels, stride=1, padding=1)
-        self.bn = nn.BatchNorm2d(num_features=out_channels)
+        #self.bn = nn.BatchNorm2d(num_features=out_channels)
         self.relu = nn.ReLU()
 
     def forward(self, x):
         x = self.conv(x)
-        x = self.bn(x)
+        #x = self.bn(x)
         x = self.relu(x)
         return x

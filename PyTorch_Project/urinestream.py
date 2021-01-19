@@ -18,6 +18,7 @@ def main(config: dict):
     and runs the training and validation loop
     """
     model_name = config['model_params']['model_name']
+
     print('Initializing train and validation datasets for model {0}'.format(model_name))
 
     # Means and Standard Deviations per image channel can be passed through the configuration file for normalizing images.
@@ -30,6 +31,9 @@ def main(config: dict):
                                                  config_train['delimiter'],
                                                  True,
                                                  config['number_channels'])
+
+        print('RGB Mean values = {0}'.format(rgb_mean))
+        print('RGB STD values = {0}'.format(rgb_std))
 
         train_dataset_loader = CustomDatasetDataLoader(
             config['train_dataset_params'], rgb_mean, rgb_std)
@@ -63,6 +67,11 @@ def main(config: dict):
                       train_dataset_loader.dataloader,
                       valid_dataset_loader.dataloader)
 
+    # Use if you want to convert model to ONNX
+    #if(cnn_model.train_on_gpu):
+            #res = config['test_dataset_params']['dataset_resolution']
+            #dummy_input_onnx = torch.randn(1, 3, 96, 96, device='cuda')
+
     # Main Train/Validation Loop
     non_improving_epochs = 0
     cnn_model.train_losses = []
@@ -82,8 +91,15 @@ def main(config: dict):
         if validation_loss < minimum_validation_loss:
             print('Validation loss decreased ({:.7f} --> {:.7f}).  Saving model ...'.format(
                 minimum_validation_loss, validation_loss))
-            torch.save(cnn_model.model.state_dict(
-            ), config['model_params']['best_path'] + model_name + '_best_weights.pt')
+            torch.save(cnn_model.model.state_dict(), config['model_params']['best_path'] + model_name + '_best_weights.pt')
+
+            # Use if you want to convert model to ONNX
+            #if(cnn_model.train_on_gpu):
+                #print('Save ONNX-Model')
+                #torch.onnx.export(cnn_model.model.eval(), dummy_input_onnx,
+                                 #config['model_params']['best_path'] + model_name + '_best_weights.onnx',
+                                 #input_names=["u_image"], output_names=["stream_shape"], verbose=False)
+
             minimum_validation_loss = validation_loss
             non_improving_epochs = 0
         else:
@@ -95,6 +111,13 @@ def main(config: dict):
 
     # Save last weights
     print('Saving last weights to {0}'.format(config['model_params']['last_path']))
+
+    # Use if you want to convert model to ONNX
+    #if(cnn_model.train_on_gpu):
+        #torch.onnx.export(cnn_model.model.eval(), dummy_input_onnx,
+                          #config['model_params']['last_path'] + model_name + '_last_weights.onnx', 
+                          #input_names=["u_image"], output_names=["stream_shape"], verbose=True)
+
     torch.save(cnn_model.model.state_dict(), config['model_params']['last_path'] + model_name + '_last_weights.pt')
 
 
