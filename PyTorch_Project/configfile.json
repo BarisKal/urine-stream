@@ -44,7 +44,7 @@
     "model_params": {
         "model_name": "complex_cnn",
         "max_epochs": 15,
-        "lr": 0.1,
+        "lr": 0.001,
         "weight_decay": 0,
         "use_dropout": true,
         "dropout_probability": 0.5,
