@@ -19,4 +19,5 @@ Date;Number_Hours;Description
 29.12.2020;6;Working on webapp
 05.01.2021;5;Converting model to ONNX and trying to build a webapp around it
 10.01.2021;5;Webapp with Flask and PyTorch model built
-18.01.2021;4;Webapp finished
+18.01.2021;6;Webapp finished and worked on final report
+19.01.2021;4;Final report finished
