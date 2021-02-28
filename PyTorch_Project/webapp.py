@@ -11,25 +11,30 @@ from models.basiccnn_model import BasicCNN
 app = Flask(__name__)
 
 # Modelling Task
+device = torch.device('gpu' if torch.cuda.is_available() else 'cpu')
 model = ComplexCNN()
-model.load_state_dict(torch.load('./models/weights/complex_cnn_best_weights.pt'))
+model.load_state_dict(torch.load(
+    './models/weights/complex_cnn_best_weights.pt', map_location=device))
 model.eval()
 
 image_size = 96
 class_names = ['Bad', 'Good']
 
+
 def transform_image(image_bytes):
     my_transforms = transforms.Compose([
         transforms.Resize(image_size),
-		transforms.ToTensor(),
+        transforms.ToTensor(),
         transforms.Normalize([0.31652900903431447, 0.266250765902844, 0.21060654775159457],
                              [0.1562390761865127, 0.14919033862737696, 0.14389230815030807])
-	])
+    ])
 
     image = Image.open(io.BytesIO(image_bytes))
     return my_transforms(image).unsqueeze(0)
 
 # Treat the web process
+
+
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -56,8 +61,9 @@ def upload_file():
                 print('Wrong file extension detected!')
 
         return render_template('index.html', res=results)
-    
+
     return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

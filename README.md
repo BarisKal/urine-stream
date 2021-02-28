@@ -23,7 +23,20 @@ Can be found inside releases. The model weights are saved under PyTorch_Project 
 Images in higher resolution with 300x300 pixels, can be downloaded [here](https://mega.nz/file/bIR2mbKT#ZtVDEW0-N8CzKuxjtt4thHh94hLPZWIRUQmAu8T0B-U)
 
 ## Starting web-application
-$**python webapp.py**
+We built around the CNN-models a web application to test the models. It provides a minimal gui to select and upload images. After uploading images, the model classifies the images and prints the detected class out.
+The main file of the web application is **webapp.py** and it expects in the current configuration the PyTorch weights **complex_cnn_best_weights.pt** under ./models/weights/. This can be changed in webapp.py of course if needed.
+The web application can be started with $**python webapp.py** in the console. The FLASK app starts and in the console following information is printed out:
+```
+* Serving Flask app "webapp" (lazy loading)
+* Environment: production
+  WARNING: This is a development server. Do not use it in a production deployment.
+  Use a production WSGI server instead.
+* Debug mode: on
+* Restarting with stat
+* Debugger is active!
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+```
+After starting the FLASK app, the web application can be opened in a browser under (http://127.0.0.1:5000/). For testing, the example images under ./example_images can be used.
 
 ## Brief description of Python files in project
 * configfile.json: Global variables and configurations
