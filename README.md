@@ -36,7 +36,7 @@ The web application can be started with $**python webapp.py** in the console. Th
 * Debugger is active!
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
-After starting the FLASK app, the web application can be opened in a browser under (http://127.0.0.1:5000/). For testing, the example images under ./example_images can be used.
+After starting the FLASK app, the web application can be opened in a browser under [http://127.0.0.1:5000/](http://127.0.0.1:5000/). For testing, the example images under ./example_images can be used.
 
 ## Brief description of Python files in project
 * configfile.json: Global variables and configurations
